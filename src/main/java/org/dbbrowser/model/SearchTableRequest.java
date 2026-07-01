@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,6 +21,6 @@ public class SearchTableRequest {
     @NotNull(message = "tableName è obbligatorio")
     private String tableName;
 
-    private String tipologia;
+    private List<String> tipologie;
 
 }

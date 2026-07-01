@@ -45,11 +45,13 @@ public class DbServiceImpl implements DbService {
 
         List<TableViewDTO> returnList = new java.util.ArrayList<>();
 
-        if(request.getTipologia() == null || request.getTipologia().equalsIgnoreCase("T")) {
-            returnList = searchTables(request);
-        }
-        if(request.getTipologia() == null || request.getTipologia().equalsIgnoreCase("V")) {
-            returnList = searchViews(request);
+        if(request.getTipologie() != null ) {
+            if (request.getTipologie().contains("T")) {
+                returnList.addAll(searchTables(request));
+            }
+            if (request.getTipologie().contains("V")) {
+                returnList.addAll(searchViews(request));
+            }
         }
         return returnList;
     }
