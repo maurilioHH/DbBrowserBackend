@@ -1,0 +1,72 @@
+server:
+  port: 8085
+
+spring:
+  main:
+    web-application-type: servlet
+  datasource:
+    oracle-MS00529:
+      url: 172.19.38.44:1521/ISTSVILSN
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-MS00529.url}
+      username: MS00529
+      password: MS00529
+      driver-class-name: oracle.jdbc.OracleDriver
+    oracle-PAAPAPPL:
+      url: 172.19.38.44:1521/BDUSVILSN.DCSI.INPDAP.IT
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-PAAPAPPL.url}
+      username: PAAPAPPL
+      password: PAAPAPPL
+      driver-class-name: oracle.jdbc.OracleDriver
+    oracle-MS00206:
+      url: 172.19.38.44:1521/ISTSVILSN
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-MS00206.url}
+      username: MS00206
+      password: MS00206
+      driver-class-name: oracle.jdbc.OracleDriver
+    oracle-ENINAPPL:
+      url: 172.19.38.44:1521/BDUSVILSN.DCSI.INPDAP.IT
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-ENINAPPL.url}
+      username: ENINAPPL
+      password: ENINAPPL
+      driver-class-name: oracle.jdbc.OracleDriver
+    oracle-ENINAPPL-2:
+      url: 172.19.38.44:1521/ISTSVILSN
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-ENINAPPL-2.url}
+      username: ENINAPPL
+      password: ENINAPPL
+      driver-class-name: oracle.jdbc.OracleDriver
+    oracle-MS02088:
+      url: 172.19.38.44:1521/ISTSVILSN
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-MS02088.url}
+      username: MS02088
+      password: MS02088
+      driver-class-name: oracle.jdbc.OracleDriver
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+    yaml:
+      enabled: true
+
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operationsSorter: method
+    tagsSorter: alpha
+  packages-to-scan: org.dbbrowser
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  writer-with-default-pretty-printer: true
+  info:
+    title: MSGestionesc724
+    version: 1.0.0
+    description: Microservizio Java con framework Spring
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cache: TRACE
+    #org.springframework.data.redis.cache: TRACE
+    #org.springframework.data.redis.core: DEBUG
+
