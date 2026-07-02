@@ -3,10 +3,7 @@ package org.dbbrowser.service.impl;
 
 import org.apache.coyote.BadRequestException;
 import org.dbbrowser.config.DatabaseProperties;
-import org.dbbrowser.model.ColumnDTO;
-import org.dbbrowser.model.SearchTableRequest;
-import org.dbbrowser.model.TableColumnsRequest;
-import org.dbbrowser.model.TableViewDTO;
+import org.dbbrowser.model.*;
 import org.dbbrowser.repository.OracleRepository;
 import org.dbbrowser.service.DbService;
 import org.springframework.stereotype.Service;
@@ -70,8 +67,7 @@ public class DbServiceImpl implements DbService {
         }
     }
 
-
-    private List<TableViewDTO>  searchTables(SearchTableRequest request){
+    private List<TableViewDTO> searchTables(SearchTableRequest request){
         List<TableViewDTO> returnList = new java.util.ArrayList<>();
         try {
             if (request.getDatabaseName() != null) {
@@ -120,10 +116,10 @@ public class DbServiceImpl implements DbService {
                 String user = dbConfig.getUsername();
 
                 List<TableViewDTO> list = repository.findViewsByNameLike(request);
-                list.forEach(table -> {
-                    table.setDbKey(request.getDatabaseName());
-                    table.setUrl(url);
-                    table.setUser(user);
+                list.forEach(view -> {
+                    view.setDbKey(request.getDatabaseName());
+                    view.setUrl(url);
+                    view.setUser(user);
                 });
                 returnList.addAll(list);
             } else {
@@ -134,10 +130,10 @@ public class DbServiceImpl implements DbService {
                     DbContextHolder.setCurrentDb(dbKey);
 
                     List<TableViewDTO> list = repository.findViewsByNameLike(request);
-                    list.forEach(table -> {
-                        table.setDbKey(dbKey);
-                        table.setUrl(url);
-                        table.setUser(user);
+                    list.forEach(view -> {
+                        view.setDbKey(dbKey);
+                        view.setUrl(url);
+                        view.setUser(user);
                     });
                     returnList.addAll(list);
                 }
@@ -149,5 +145,12 @@ public class DbServiceImpl implements DbService {
         return returnList;
     }
 
+    @Override
+    public String getQueryView(QueryViewRequest request) {
+        //DatabaseProperties.DbConfig dbConfig = dbProperties.getDatasource().get(request.getDatabaseKey());
+        DbContextHolder.setCurrentDb(request.getDatabaseKey());
+
+        return repository.getQueryView(request);
+    }
 
 }

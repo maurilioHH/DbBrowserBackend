@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TableColumnsRequest {
+public class QueryViewRequest {
 
     @NotNull(message = "databaseKey è obbligatoria")
     private String databaseKey;
@@ -19,7 +19,7 @@ public class TableColumnsRequest {
     @NotNull(message = "owner è obbligatorio")
     private String owner;
 
-    @NotNull(message = "tableName è obbligatorio")
-    private String tableName;
+    @NotNull(message = "viewName è obbligatorio")
+    private String viewName;
 
 }

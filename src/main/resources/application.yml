@@ -17,6 +17,12 @@ spring:
       username: PAAPAPPL
       password: PAAPAPPL
       driver-class-name: oracle.jdbc.OracleDriver
+    oracle-MS00205:
+      url: 172.19.38.44:1521/ISTSVILSN
+      jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-MS00205.url}
+      username: MS00205
+      password: MS00205
+      driver-class-name: oracle.jdbc.OracleDriver
     oracle-MS00206:
       url: 172.19.38.44:1521/ISTSVILSN
       jdbc-url: jdbc:oracle:thin:@${spring.datasource.oracle-MS00206.url}

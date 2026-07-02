@@ -5,10 +5,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.dbbrowser.config.DatabaseProperties;
-import org.dbbrowser.model.ColumnDTO;
-import org.dbbrowser.model.SearchTableRequest;
-import org.dbbrowser.model.TableColumnsRequest;
-import org.dbbrowser.model.TableViewDTO;
+import org.dbbrowser.model.*;
 import org.dbbrowser.service.DbService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.RequestEntity;
@@ -71,5 +68,15 @@ public class DbController {
     }
 
 
+    @PostMapping(value = "/getQueryView", produces = "application/json; charset=utf-8")
+    public ResponseEntity<String> getQueryView(
+            @Valid @RequestBody QueryViewRequest request
+    ) {
+        String res = dbService.getQueryView(request);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "text/html; charset=utf-8")
+                .body(res);
+    }
 
 }

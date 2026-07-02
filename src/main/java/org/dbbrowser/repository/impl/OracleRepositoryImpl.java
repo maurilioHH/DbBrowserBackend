@@ -1,9 +1,6 @@
 package org.dbbrowser.repository.impl;
 
-import org.dbbrowser.model.ColumnDTO;
-import org.dbbrowser.model.SearchTableRequest;
-import org.dbbrowser.model.TableColumnsRequest;
-import org.dbbrowser.model.TableViewDTO;
+import org.dbbrowser.model.*;
 import org.dbbrowser.repository.OracleRepository;
 import org.dbbrowser.utils.Constants;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -70,7 +67,8 @@ public class OracleRepositoryImpl implements OracleRepository {
                                 null,
                                 null,
                                 rs.getString("owner"),
-                                rs.getString("table_name")
+                                rs.getString("table_name"),
+                                "T"
                         ))
                 .list();
     }
@@ -111,7 +109,8 @@ public class OracleRepositoryImpl implements OracleRepository {
                                 null,
                                 null,
                                 rs.getString("owner"),
-                                rs.getString("view_name")
+                                rs.getString("view_name"),
+                                "V"
                         ))
                 .list();
     }
@@ -149,6 +148,22 @@ public class OracleRepositoryImpl implements OracleRepository {
                                 rs.getString("COMMENTS")
                         ))
                 .list();
+    }
+
+    @Override
+    public String getQueryView(QueryViewRequest request) {
+        String sql = """
+                SELECT text 
+                FROM all_views 
+                WHERE owner = :owner
+                AND view_name = :view_name
+                """;
+        return jdbcClient.sql(sql)
+                .param("owner", request.getOwner())
+                .param("view_name", request.getViewName())
+                .query((rs, rowNum) -> rs.getString("text"))
+                .single();
+
     }
 
 }

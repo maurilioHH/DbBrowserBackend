@@ -1,6 +1,8 @@
 package org.dbbrowser.model;
 
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +17,6 @@ public class TableViewDTO {
     private String url;
     private String user;
     private String owner;
-    private String tableName;
+    private String name;
+    private String type;
 }

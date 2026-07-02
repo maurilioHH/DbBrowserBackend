@@ -3,10 +3,7 @@ package org.dbbrowser.service;
 
 import org.apache.coyote.BadRequestException;
 import org.dbbrowser.config.DatabaseProperties;
-import org.dbbrowser.model.ColumnDTO;
-import org.dbbrowser.model.SearchTableRequest;
-import org.dbbrowser.model.TableColumnsRequest;
-import org.dbbrowser.model.TableViewDTO;
+import org.dbbrowser.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,5 +17,7 @@ public interface DbService {
     List<TableViewDTO> searchTablesAndViews(SearchTableRequest request)  throws BadRequestException;
 
     List<ColumnDTO> searchTableColumns(TableColumnsRequest request);
+
+    String getQueryView(QueryViewRequest request);
 
 }
